@@ -67,8 +67,7 @@ class BaseSitemapCache:
     def iterate_keys(self):
         """Yield integer index keys.
 
-        These are exclusively keys of the form 0, 1, 2, ... Others if any are ignored.
-
+        These are exclusively keys of the form 0, 1, 2, ... Others, if any, are ignored.
         """
         j = 0
         # In practice, there typically won't be a large number of calls

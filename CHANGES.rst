@@ -8,6 +8,10 @@
 Changes
 =======
 
+Version 0.1.1 (2025-05-15)
+
+- entrypoint: fix path to InvenioSitemap in pyproject.toml
+
 Version 0.1.0 (2025-03-25)
 
 - Initial public release.

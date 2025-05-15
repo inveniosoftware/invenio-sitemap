@@ -13,7 +13,7 @@ from .ext import InvenioSitemap
 from .sitemap import SitemapSection
 from .utils import format_to_w3c, iterate_urls_of_sitemap_indices
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 __all__ = (
     "__version__",

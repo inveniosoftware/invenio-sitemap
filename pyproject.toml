@@ -51,7 +51,7 @@ tests = [
 
 # Entrypoints
 [project.entry-points."invenio_base.apps"]
-invenio_sitemap = "invenio_sitemap:InvenioSitemap"
+invenio_sitemap = "invenio_sitemap.ext:InvenioSitemap"
 
 [project.entry-points."invenio_base.blueprints"]
 invenio_sitemap = "invenio_sitemap.views:blueprint"

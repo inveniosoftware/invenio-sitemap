@@ -27,6 +27,7 @@ var/
 *.egg
 Pipfile
 Pipfile.lock
+uv.lock
 .venv/
 
 # PyInstaller

@@ -8,6 +8,10 @@
 Changes
 =======
 
+Version 0.1.2 (2025-06-13)
+
+- content-type: set to application/xml
+
 Version 0.1.1 (2025-05-15)
 
 - entrypoint: fix path to InvenioSitemap in pyproject.toml

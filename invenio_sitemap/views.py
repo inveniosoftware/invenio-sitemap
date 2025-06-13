@@ -9,7 +9,7 @@
 """Views."""
 
 
-from flask import Blueprint, abort, render_template
+from flask import Blueprint, abort, make_response, render_template
 from invenio_cache import current_cache
 
 from .cache import SitemapCache, SitemapIndexCache
@@ -32,23 +32,30 @@ def _get_cached_or_404(cache_cls, page):
         abort(404)
 
 
+def xml_response(body):
+    """Wrap the body in an XML response."""
+    response = make_response(body)
+    response.headers["Content-Type"] = "application/xml"
+    return response
+
+
 @blueprint.route("/sitemap_index_<int:page>.xml", methods=["GET"])
 def sitemap_index(page):
     """Get the sitemap index."""
     entries = _get_cached_or_404(SitemapIndexCache, page)
-    return render_template(
+    sitemap_index = render_template(
         "invenio_sitemap/sitemap_index.xml",
-        mimetype="text/xml",
         entries=entries,
     )
+    return xml_response(sitemap_index)
 
 
 @blueprint.route("/sitemap_<int:page>.xml", methods=["GET"])
 def sitemap(page):
     """Get the sitemap page."""
     entries = _get_cached_or_404(SitemapCache, page)
-    return render_template(
+    sitemap = render_template(
         "invenio_sitemap/sitemap.xml",
-        mimetype="text/xml",
         entries=entries,
     )
+    return xml_response(sitemap)

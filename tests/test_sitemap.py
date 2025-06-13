@@ -82,6 +82,7 @@ def test_sitemap_has_valid_structure(client, primed_cache):
     resp = client.get("/sitemap_0.xml")
 
     assert 200 == resp.status_code
+    assert "application/xml" == resp.content_type
     schema.validate(resp.data)
 
 

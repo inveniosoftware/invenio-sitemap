@@ -101,6 +101,19 @@ def _get_latest_lastmod(entries):
     return result
 
 
+def _default_index_entry_func(page, lastmod):
+    """Default generator for sitemap index entries.
+
+    :param page: int. Index of the sitemap page.
+    :param lastmod: str. W3C datetime format.
+    :return: dict with 'loc' and 'lastmod' keys.
+    """
+    return {
+        "loc": invenio_url_for("invenio_sitemap.sitemap", page=page),
+        "lastmod": lastmod,
+    }
+
+
 def _iterate_sitemap_entries(lastmods):
     """Generate sitemap entries from lastmods.
 
@@ -108,7 +121,8 @@ def _iterate_sitemap_entries(lastmods):
     :yield: sitemap entry dict
     """
     for i, lastmod in enumerate(lastmods):
-        yield {
-            "loc": invenio_url_for("invenio_sitemap.sitemap", page=i),
-            "lastmod": lastmod,
-        }
+        index_entry_func = current_app.config.get(
+            "SITEMAP_INDEX_ENTRY_FUNC",
+            _default_index_entry_func,
+        )
+        yield index_entry_func(page=i, lastmod=lastmod)

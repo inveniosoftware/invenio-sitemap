@@ -31,3 +31,25 @@ def test_init():
     assert "invenio-sitemap" not in app.extensions
     ext.init_app(app)
     assert "invenio-sitemap" in app.extensions
+
+
+def test_config_defaults():
+    """Test that default configuration values are set correctly."""
+    app = Flask("testapp")
+    ext = InvenioSitemap(app)
+
+    assert app.config.get("SITEMAP_ROOT_VIEW_ENABLED") is False
+    assert app.config.get("SITEMAP_MAX_ENTRY_COUNT") == 10000
+    assert app.config.get("SITEMAP_SECTIONS") == []
+
+
+def test_config_override():
+    """Test that configuration can be overridden."""
+    app = Flask("testapp")
+    app.config["SITEMAP_ROOT_VIEW_ENABLED"] = True
+    app.config["SITEMAP_MAX_ENTRY_COUNT"] = 5000
+
+    ext = InvenioSitemap(app)
+
+    assert app.config["SITEMAP_ROOT_VIEW_ENABLED"] is True
+    assert app.config["SITEMAP_MAX_ENTRY_COUNT"] == 5000

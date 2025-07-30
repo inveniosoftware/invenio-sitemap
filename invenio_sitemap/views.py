@@ -8,8 +8,7 @@
 
 """Views."""
 
-
-from flask import Blueprint, abort, make_response, render_template
+from flask import Blueprint, abort, current_app, make_response, render_template
 from invenio_cache import current_cache
 
 from .cache import SitemapCache, SitemapIndexCache
@@ -37,6 +36,19 @@ def xml_response(body):
     response = make_response(body)
     response.headers["Content-Type"] = "application/xml"
     return response
+
+
+@blueprint.route("/sitemap.xml", methods=["GET"])
+def sitemap_root():
+    """Get all sitemap root."""
+    if not current_app.config["SITEMAP_ROOT_VIEW_ENABLED"]:
+        abort(404)
+    entries = _get_cached_or_404(SitemapIndexCache, 0)
+    sitemap_index = render_template(
+        "invenio_sitemap/sitemap_index.xml",
+        entries=entries,
+    )
+    return xml_response(sitemap_index)
 
 
 @blueprint.route("/sitemap_index_<int:page>.xml", methods=["GET"])

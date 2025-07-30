@@ -8,7 +8,6 @@
 
 """Configuration."""
 
-
 SITEMAP_MAX_ENTRY_COUNT = 10000
 """Maximum number of entries (<url> or <sitemap>) per file.
 
@@ -22,3 +21,6 @@ number of entries in the Sitemap Index and Sitemap files.
 
 SITEMAP_SECTIONS = []
 """Instances of `sitemap.SitemapSection` that will populate the Sitemap files."""
+
+SITEMAP_ROOT_VIEW_ENABLED = False
+"""Enable the `/sitemap.xml` endpoint serving the first sitemap index."""

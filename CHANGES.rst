@@ -8,6 +8,10 @@
 Changes
 =======
 
+Version v0.2.0 (released 2025-08-01)
+
+- views: add configurable global `/sitemap.xml` view
+
 Version 0.1.2 (2025-06-13)
 
 - content-type: set to application/xml

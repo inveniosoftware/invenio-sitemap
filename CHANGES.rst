@@ -8,6 +8,10 @@
 Changes
 =======
 
+Version v0.3.0 (released 2025-08-07)
+
+- config: enable `/sitemap.xml` root view by default
+
 Version v0.2.0 (released 2025-08-01)
 
 - views: add configurable global `/sitemap.xml` view

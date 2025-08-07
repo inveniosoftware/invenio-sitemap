@@ -22,5 +22,5 @@ number of entries in the Sitemap Index and Sitemap files.
 SITEMAP_SECTIONS = []
 """Instances of `sitemap.SitemapSection` that will populate the Sitemap files."""
 
-SITEMAP_ROOT_VIEW_ENABLED = False
+SITEMAP_ROOT_VIEW_ENABLED = True
 """Enable the `/sitemap.xml` endpoint serving the first sitemap index."""

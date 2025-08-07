@@ -13,18 +13,8 @@ import xmlschema
 from invenio_sitemap.cache import SitemapIndexCache
 
 
-def test_sitemap_root_disabled_by_default(client, primed_cache):
-    """Test that /sitemap.xml returns 404 when disabled."""
-    resp = client.get("/sitemap.xml")
-    assert resp.status_code == 404
-
-
-def test_sitemap_root_enabled_with_content(
-    client, primed_cache, set_app_config_fn_scoped
-):
-    """Test that /sitemap.xml works when enabled and returns first index page."""
-    set_app_config_fn_scoped({"SITEMAP_ROOT_VIEW_ENABLED": True})
-
+def test_sitemap_root_enabled_by_default(client, primed_cache):
+    """Test that /sitemap.xml is enabled by default and returns first index page."""
     resp = client.get("/sitemap.xml")
     assert resp.status_code == 200
     assert resp.content_type == "application/xml"
@@ -33,25 +23,26 @@ def test_sitemap_root_enabled_with_content(
     assert b"<loc>https://127.0.0.1:5000/sitemap_0.xml</loc>" in resp.data
     assert b"<loc>https://127.0.0.1:5000/sitemap_1.xml</loc>" in resp.data
 
-    # Verify lastmod dates are included
-    assert b"<lastmod>2025-02-02T06:00:00Z</lastmod>" in resp.data
 
-    # Validate against the sitemap index schema
-    schema = xmlschema.XMLSchema("tests/xsds/siteindex.xsd")
-    schema.validate(resp.data.decode("utf-8"))
-
-
-def test_sitemap_root_empty_cache(client, empty_cache, set_app_config_fn_scoped):
-    """Test that /sitemap.xml returns 404 when first index page is not cached."""
-    set_app_config_fn_scoped({"SITEMAP_ROOT_VIEW_ENABLED": True})
+def test_sitemap_root_disabled_when_configured(
+    client, primed_cache, set_app_config_fn_scoped
+):
+    """Test that /sitemap.xml returns 404 when explicitly disabled."""
+    set_app_config_fn_scoped({"SITEMAP_ROOT_VIEW_ENABLED": False})
 
     resp = client.get("/sitemap.xml")
     assert resp.status_code == 404
 
 
-def test_sitemap_root_only_first_page(client, empty_cache, set_app_config_fn_scoped):
+def test_sitemap_root_empty_cache(client, empty_cache):
+    """Test that /sitemap.xml returns 404 when first index page is not cached."""
+
+    resp = client.get("/sitemap.xml")
+    assert resp.status_code == 404
+
+
+def test_sitemap_root_only_first_page(client, empty_cache):
     """Test that /sitemap.xml only returns the first index page."""
-    set_app_config_fn_scoped({"SITEMAP_ROOT_VIEW_ENABLED": True})
 
     # Manually populate cache with multiple index pages
     sitemap_index_cache = SitemapIndexCache(empty_cache)

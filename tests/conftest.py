@@ -12,7 +12,6 @@ See https://pytest-invenio.readthedocs.io/ for documentation on which test
 fixtures are available.
 """
 
-
 import pytest
 from invenio_app.factory import create_app as _create_app
 from invenio_cache import current_cache

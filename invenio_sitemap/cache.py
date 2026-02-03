@@ -9,7 +9,6 @@
 
 """Cache wrapper."""
 
-
 NAMESPACE = "invenio_sitemap"
 
 

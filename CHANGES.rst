@@ -1,5 +1,6 @@
 ..
     Copyright (C) 2025 Northwestern University.
+    Copyright (C) 2026 Graz University of Technology.
 
     invenio-sitemap is free software; you can redistribute it and/or
     modify it under the terms of the MIT License; see LICENSE file for more
@@ -7,6 +8,11 @@
 
 Changes
 =======
+
+Version v1.0.0 (released 2026-02-03)
+
+- chore(black): update formatting to >= 26.0
+- chore(setup): bump dependencies
 
 Version v0.3.0 (released 2025-08-07)
 

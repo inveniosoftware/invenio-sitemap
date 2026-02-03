@@ -2,6 +2,7 @@
 #
 # Copyright (C) 2025 CERN.
 # Copyright (C) 2025 Northwestern University.
+# Copyright (C) 2026 Graz University of Technology.
 #
 # invenio-sitemap is free software; you can redistribute it and/or modify
 # it under the terms of the MIT License; see LICENSE file for more details.
@@ -13,7 +14,7 @@ from .ext import InvenioSitemap
 from .sitemap import SitemapSection
 from .utils import format_to_w3c, iterate_urls_of_sitemap_indices
 
-__version__ = "0.3.0"
+__version__ = "1.0.0"
 
 __all__ = (
     "__version__",

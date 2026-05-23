@@ -1,9 +1,5 @@
-# -*- coding: utf-8 -*-
-#
-# Copyright (C) 2025 Northwestern University.
-#
-# invenio-sitemap is free software; you can redistribute it and/or modify
-# it under the terms of the MIT License; see LICENSE file for more details.
+# SPDX-FileCopyrightText: 2025 Northwestern University.
+# SPDX-License-Identifier: MIT
 
 # TODO: Generate this manifest file by running the following commands:
 # (please sort the lines in this file after running below commands)

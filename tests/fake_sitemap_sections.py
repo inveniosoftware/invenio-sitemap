@@ -1,12 +1,13 @@
 # SPDX-FileCopyrightText: 2025 CERN.
 # SPDX-FileCopyrightText: 2025 Northwestern University.
+# SPDX-FileCopyrightText: 2026 TU Wien.
 # SPDX-License-Identifier: MIT
 
 """Fake Sitemap Sections."""
 
 from datetime import datetime, timezone
 
-import arrow
+import pendulum
 
 from invenio_sitemap.sitemap import SitemapSection
 from invenio_sitemap.utils import format_to_w3c
@@ -24,7 +25,7 @@ class FakeSitemapSection1(SitemapSection):
             },
             {
                 "id": "bar",
-                "updated": arrow.get(datetime(2025, 2, 1, 22), "US/Pacific").datetime,
+                "updated": pendulum.instance(datetime(2025, 2, 1, 22), tz="US/Pacific"),
             },
             {
                 "id": "baz",

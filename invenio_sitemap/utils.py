@@ -1,11 +1,12 @@
 # SPDX-FileCopyrightText: 2025 CERN.
 # SPDX-FileCopyrightText: 2025 Northwestern University.
+# SPDX-FileCopyrightText: 2026 TU Wien.
 # SPDX-License-Identifier: MIT
 
 
 """Utils."""
 
-import arrow
+import pendulum
 from invenio_base import invenio_url_for
 from invenio_cache import current_cache
 
@@ -19,13 +20,17 @@ def format_to_w3c(dt):
     UTC designator 'Z'. See more information at
     https://www.w3.org/TR/NOTE-datetime.
     """
-    dt_arrow_utc = arrow.get(dt).to("utc")
-    return dt_arrow_utc.format("YYYY-MM-DDTHH:mm:ss") + "Z"
+    dt_utc = pendulum.instance(dt).astimezone(pendulum.UTC)
+    return dt_utc.format("YYYY-MM-DDTHH:mm:ss") + "Z"
 
 
 def parse_from_w3c(dt_w3c_str):
     """Convert a W3C Date and Time formatted string into a datetime."""
-    return arrow.get(dt_w3c_str, "YYYY-MM-DDTHH:mm:ssZ").datetime
+    # `pendulum.from_format()` uses its own set of tokens, including Z;
+    # to get a literal Z, we need to put it into square brackets
+    # (and we do the same for the literal T, even though that's not needed)
+    # cf. https://pendulum.eustace.io/docs/#formatter
+    return pendulum.from_format(dt_w3c_str, "YYYY-MM-DD[T]HH:mm:ss[Z]")
 
 
 def iterate_urls_of_sitemap_indices():

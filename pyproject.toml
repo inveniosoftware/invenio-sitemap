@@ -35,7 +35,7 @@ keywords = ["invenio", "inveniordm", "rdm", "sitemap"]
 license = { file = "LICENSE" }
 name = "invenio-sitemap"
 readme = "README.rst"
-requires-python = ">=3.9"
+requires-python = ">=3.11"
 urls = { Repository = "https://github.com/inveniosoftware/invenio-sitemap" }
 
 # Entrypoints
